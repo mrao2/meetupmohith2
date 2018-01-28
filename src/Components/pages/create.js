@@ -11,25 +11,34 @@ class Create extends Component {
         <p>This is an account for people who are either event hosts or admins of an orgainzation.</p>
 
       	<form>
+
           <TextField
-             name="userName"
-             hintText="Username"
+            name="firstName"
+            hintText="First name"
 
-           />
-         <br />
-         <TextField
-             name="password"
-             hintText="Password"
+          />
+          <br />
+          <TextField
+            name="userName"
+            hintText="Username"
 
-           />
-           <br />
-           <TextField
+          />
+          <br />
+          <TextField
+            name="password"
+            hintText="Password"
+
+          />
+          <br />
+          <TextField
             disabled={true}
-               name="apiKey"
-               hintText="APIKey"
-             />
-             <br />
-           <RaisedButton label="Submit" primary />
+            name="apiKey"
+            hintText="APIKey"
+          />
+          <br />
+
+          <RaisedButton label="Submit" primary />
+
         </form>
       </div>
 
