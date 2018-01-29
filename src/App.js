@@ -7,12 +7,14 @@ import {
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
+
 //Components
 import Homepage from './Components/pages/Homepage'
 import Header from './Components/header'
 import Login from './Components/pages/login'
 import Dashboard from './Components/pages/dashboard'
 import Create from './Components/pages/create'
+import Footer from './Components/footer'
 
 
 class App extends Component {
@@ -28,10 +30,11 @@ class App extends Component {
               <Route exact path='/Login' component={Login} />
               <Route exact path='/Dashboard' component={Dashboard} />
               <Route exact path='/Create' component={Create} />
+
             </div>
           </Router>
 
-          
+          <Footer />
 
         </div>
       </MuiThemeProvider>

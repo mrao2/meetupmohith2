@@ -1,0 +1,14 @@
+/* footer.js */
+.footerContainer {
+  position: fixed;
+    height: 50px;
+    background-color: white;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+    text-align: left;
+}
+
+
+/* App.js */
