@@ -4,9 +4,55 @@ import Paper from 'material-ui/Paper'
 import Divider from 'material-ui/Divider'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
-
+import axios from 'axios';
 
 class login extends Component {
+  constructor(props) {
+  super(props);
+  this.state = {
+    userName: '',
+    password: ''
+  }
+
+  this.handleChange = this.handleChange.bind(this);
+  this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange = (event) => {
+    this.setState({[event.target.name]: event.target.value});
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(this.state);
+
+    let userName = this.state.userName.trim();
+    let password = this.state.password.trim();
+
+    if (!userName || !password) {
+      return <p>"Hmm..... You're missing something!"</p>;
+    }
+    this.handleLogin({
+      userName: userName,
+      password: password,
+    });
+
+    this.setState({
+      userName: '',
+      password: '',
+    });
+  }
+
+  handleLogin(entry) {
+   axios.post('http://localhost:3001/api/login', entry)
+   .then(res => {
+   this.setState({ data: res });
+   })
+   .catch(err => {
+   console.error(err);
+   })
+  }
+
   render() {
 
     return (
@@ -15,7 +61,14 @@ class login extends Component {
         <Row>
           <Col xsOffset={2} xs={8}>
             <Paper zDepth={2}>
-              <TextField hintText="Username" underlineShow={false} id="user" />
+              <TextField 
+              name="userName"
+              hintText="Username" 
+              underlineShow={false} 
+              value={this.state.userName}
+              onChange={this.handleChange} 
+
+              />
               <Divider />
             </Paper>
           </Col>
@@ -23,7 +76,15 @@ class login extends Component {
         <Row>
           <Col xsOffset={2} xs={8}>
             <Paper zDepth={2}>
-              <TextField hintText="Password" underlineShow={false} id="pass" type="password" />
+              <TextField 
+              name="password"
+              hintText="Password" 
+              underlineShow={false} 
+              type="password" 
+              value={this.state.password}
+              onChange={this.handleChange}
+
+              />
               <Divider />
               </Paper>
           </Col>
@@ -31,7 +92,7 @@ class login extends Component {
         <Row center="xs">
           <Col xs={8}>
             <Paper zDepth={2}>
-              <RaisedButton label="Login"  backgroundColor="darkGrey" href="/Dashboard"    />
+              <RaisedButton label="Login"  backgroundColor="darkGrey" onClick={(event) => this.handleSubmit(event)} primary />
               </Paper>
             </Col>
         </Row>

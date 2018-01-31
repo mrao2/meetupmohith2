@@ -4,8 +4,16 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var User = require('./models/users');
+var session = require('express-session')
+
+
 //and create our instances
 var app = express();
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false
+}));
 var router = express.Router();
 //set our port to either a predetermined port number if you have set
 //it up, or 3001
@@ -62,8 +70,37 @@ user.save(function(err) {
  //res.json({ message: 'User successfully added!' });
  });
  });
+
+
+router.route('/login')
+	.post((req, res, next) => {
+		  if (!req.session.userId) {
+		    req.session.userId = {}
+		  }
+		if (req.body.userName && req.body.password) {
+			console.log(`API - username: ${req.body.userName} - password: ${req.body.password}`)
+			User.authenticate(req.body.userName, req.body.password, (error, user) => {
+		      if (error || !user) {
+		        var err = new Error('Wrong username or password.');
+		        err.status = 401;
+		        return next(err);
+		      } else {
+		      	console.log("Login success!")	      	
+		        req.session.userId = user._id;
+		        return res.redirect('localhost:3000/Dashboard');
+		      }
+		    });
+		  } else {
+		    var err = new Error('All fields required.');
+		    err.status = 400;
+		    return next(err);
+		  }
+	})
+
+
 //Use our router configuration when we call /api
 app.use('/api', router);
+
 //starts the server and listens for requests
 app.listen(port, function() {
  console.log(`api running on port ${port}`);
