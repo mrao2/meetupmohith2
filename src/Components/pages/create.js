@@ -114,7 +114,7 @@ class Create extends Component {
 
             <Snackbar
               open={this.state.open}
-              message="Thank you, $(firstName) for singing up!"
+              message="Thank you for singing up!"
               autoHideDuration={4000}
               onRequestClose={this.handleRequestClose}
             />

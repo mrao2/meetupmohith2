@@ -15,6 +15,7 @@ import Login from './Components/pages/login'
 import Dashboard from './Components/pages/dashboard'
 import Create from './Components/pages/create'
 import Footer from './Components/footer'
+import eventPage from './Components/pages/eventPage'
 
 
 class App extends Component {
@@ -30,6 +31,7 @@ class App extends Component {
               <Route exact path='/Login' component={Login} />
               <Route exact path='/Dashboard' component={Dashboard} />
               <Route exact path='/Create' component={Create} />
+              <Route exact path='/eventPage' component={eventPage} />
 
             </div>
           </Router>

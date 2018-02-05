@@ -85,9 +85,9 @@ router.route('/login')
 		        err.status = 401;
 		        return next(err);
 		      } else {
-		      	console.log("Login success!")	      	
+		      	console.log("Login success!")
 		        req.session.userId = user._id;
-		        return res.redirect('localhost:3000/Dashboard');
+		        return res.send("Logged in!");
 		      }
 		    });
 		  } else {

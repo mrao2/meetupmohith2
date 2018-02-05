@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Paper from 'material-ui/Paper';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import Snackbar from 'material-ui/Snackbar';
-import results from './results';
+
 
 
 
