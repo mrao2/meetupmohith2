@@ -5,6 +5,8 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Paper from 'material-ui/Paper';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import Snackbar from 'material-ui/Snackbar';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import Divider from 'material-ui/Divider'
 
 
 
@@ -31,7 +33,7 @@ class eventPage extends Component {
 
        };
        onSubmit = () => {
-         const fullName = `${this.state.firstName} ${this.state.lastName}`
+         const fullName = `${this.state.firstName} ${this.state.lastName}, `
          const allNames= this.state.allNames
          console.log(fullName)
          multiNames.push(fullName)
@@ -112,16 +114,23 @@ class eventPage extends Component {
 
          <div className='results'>
          <Col mdOffset={2} xs={12}>
-         <RaisedButton label='Get results'  backgroundColor="darkGrey"  onClick={this.getResults} />
-         <Col lg={12}>
-          <Paper>
-            <h4>List of people who came: </h4>
 
-            <h3>
-              {JSON.stringify(this.state.allNames, null, 2)}
-            </h3>
-          </Paper>
-          </Col>
+         <Card>
+           <CardHeader
+            title="Attendance"
+            subtitle="Final"
+            actAsExpander={true}
+            showExpandableButton={true}
+           />
+
+           <CardText expandable={true}>
+             <RaisedButton label='Get results'  backgroundColor="darkGrey"  onClick={this.getResults} />
+             <br />
+             <Divider />
+             <br />
+             <p>{this.state.allNames}</p>
+           </CardText>
+         </Card>
           </Col>
 
          </div>

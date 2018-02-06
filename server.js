@@ -83,11 +83,11 @@ router.route('/login')
 		      if (error || !user) {
 		        var err = new Error('Wrong username or password.');
 		        err.status = 401;
-		        return next(err);
+		        return next(err)
 		      } else {
 		      	console.log("Login success!")
 		        req.session.userId = user._id;
-		        return res.send("Logged in!");
+		        res.status(200).send("Logged in!");
 		      }
 		    });
 		  } else {

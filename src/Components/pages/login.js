@@ -5,13 +5,15 @@ import Divider from 'material-ui/Divider'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import axios from 'axios';
+import Snackbar from 'material-ui/Snackbar';
 
 class login extends Component {
   constructor(props) {
   super(props);
   this.state = {
     userName: '',
-    password: ''
+    password: '',
+    open: false
   }
 
   this.handleChange = this.handleChange.bind(this);
@@ -24,7 +26,7 @@ class login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state);
+    //console.log(this.state);
 
     let userName = this.state.userName.trim();
     let password = this.state.password.trim();
@@ -40,6 +42,7 @@ class login extends Component {
     this.setState({
       userName: '',
       password: '',
+
     });
   }
 
@@ -47,11 +50,26 @@ class login extends Component {
    axios.post('http://localhost:3001/api/login', entry)
    .then(res => {
    this.setState({ data: res });
+   //console.log(this.state)
+     if (this.state.data.status == 200){
+        console.log("Redirecting.......")
+        this.props.history.push('/Dashboard')
+
+     }
    })
    .catch(err => {
-   console.error(err);
+      this.setState({
+        open: true,
+
+      })
    })
   }
+
+  handleRequestClose = () => {
+    this.setState({
+      open: false,
+    });
+  };
 
   render() {
 
@@ -61,12 +79,12 @@ class login extends Component {
         <Row>
           <Col xsOffset={2} xs={8}>
             <Paper zDepth={2}>
-              <TextField 
+              <TextField
               name="userName"
-              hintText="Username" 
-              underlineShow={false} 
+              hintText="Username"
+              underlineShow={false}
               value={this.state.userName}
-              onChange={this.handleChange} 
+              onChange={this.handleChange}
 
               />
               <Divider />
@@ -76,11 +94,11 @@ class login extends Component {
         <Row>
           <Col xsOffset={2} xs={8}>
             <Paper zDepth={2}>
-              <TextField 
+              <TextField
               name="password"
-              hintText="Password" 
-              underlineShow={false} 
-              type="password" 
+              hintText="Password"
+              underlineShow={false}
+              type="password"
               value={this.state.password}
               onChange={this.handleChange}
 
@@ -103,6 +121,12 @@ class login extends Component {
           </Col>
         </Row>
       </Grid>
+      <Snackbar
+         open={this.state.open}
+         message="Login failed! Did you enter something wrong?"
+         autoHideDuration={4000}
+         onRequestClose={this.handleRequestClose}
+       />
             </div>
 
 

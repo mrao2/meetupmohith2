@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+
+import {getNames} from '../../bootleg'
+
+
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Paper from 'material-ui/Paper';
 import {List, ListItem} from 'material-ui/List';
@@ -12,14 +16,23 @@ import FlatButton from 'material-ui/FlatButton';
 
 
 
-class Dashboard extends Component {
+
+var psuedoList= ["Abhi Nemani, ", "Brandon , ", "Matthew Bauer, ", "Nikhil Nambiar, ", "Nathaniel Stripeik, ", "Chanda , ", "Bush , ", "Tim McAndrew, ", "Joshua Veal, ", "Mona , ", "Mike Schmidt, ", "Kevin Kaifer, ", "Mohith Rao, ", "Nehemiah Dacres"]
+export default class Dashboard extends Component {
+  constructor() {
+    super()
+    this.state= {
+      attendees: [],
+    }
+
+  }
 
   render() {
 
 
     return (
     	<div className="container-fluid">
-        <div classname="bodyHeader">
+        <div className="bodyHeader">
           <h1>
   	    		Welcome to your Dashboard!
   	    	</h1>
@@ -46,12 +59,15 @@ class Dashboard extends Component {
 
                 </CardActions>
                 <CardText expandable={true}>
-                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                 Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-                 Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-                 Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-                 <br />
-                 <FlatButton label="Get Attendance" />
+                • What we will do
+                  We Design and Engineer technical solutions to civic problems.
+                • What to bring
+                  Maybe your laptop.
+                <br />
+                RSVPs:
+                <br />
+                <Divider />
+                <p>{psuedoList}</p>
                 </CardText>
               </Card>
             </Col>
@@ -72,12 +88,15 @@ class Dashboard extends Component {
 
                 </CardActions>
                 <CardText expandable={true}>
-                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                 Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-                 Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-                 Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-                 <br />
-                 <FlatButton label="Get Attendance" disabled={true} />
+                • What we will do:
+                  We Design and Engineer technical solutions to civic problems.
+                • What to bring:
+                  Maybe your laptop.
+                <br />
+                RSVPs:
+                <br />
+                <Divider />
+
                 </CardText>
               </Card>
             </Col>
@@ -91,5 +110,3 @@ class Dashboard extends Component {
     )
   }
 }
-
-export default Dashboard
